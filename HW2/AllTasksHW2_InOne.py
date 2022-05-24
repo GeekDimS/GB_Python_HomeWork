@@ -122,3 +122,22 @@ print(
 
 # 4. Простые делители числа 13195 - это 5, 7, 13 и 29.
 # Каков самый большой делитель числа 600851475143, являющийся простым числом?
+
+listPrimeNumber = [2]
+listTargetPrimeNumber = []
+number = 600851475143 #13195
+optNumber = int(number // 2)
+for i in range(3, optNumber, 2):
+    primeNumber = 1
+    for j in listPrimeNumber:
+        if i % j == 0:
+            primeNumber = 0
+            break
+    if primeNumber:
+        listPrimeNumber.append(i)
+        print(f'Простое число {i}')
+for i in listPrimeNumber:
+    if number % i == 0:
+        listTargetPrimeNumber.append(i)
+        print(f'Делитель {i}')
+print(listTargetPrimeNumber)
