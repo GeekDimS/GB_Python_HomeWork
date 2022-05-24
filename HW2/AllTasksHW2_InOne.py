@@ -52,3 +52,15 @@ while numb != 0:
     s = s + str(div)
     numb = numb // 2
 print(s[::-1])
+
+
+# Экстра-задачи:
+# 1. Написать программу преобразования двоичного числа в десятичное.
+
+inpBinary = str(input('Введите двоичное число:  '))
+inpBinary = inpBinary[::-1]
+res = 0
+for i, val in enumerate(inpBinary):
+    if val == '1':
+        res += 2**i
+print(res)
