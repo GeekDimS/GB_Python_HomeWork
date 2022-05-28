@@ -63,32 +63,52 @@
 
 # 1.	Найти НОК двух чисел
 
+import decimal
 import math
 
 
-val1 = int(input('Введите первое целое число:  '))
-val2 = int(input('Введите второе целое число:  '))
+# val1 = int(input('Введите первое целое число:  '))
+# val2 = int(input('Введите второе целое число:  '))
 
+# def NOD(div1, div2):
+#     if(div1 < div2):
+#         temp = div1
+#         div1 = div2
+#         div2 = temp
+#     while(div2 != 0):
+#         temp = div1 % div2
+#         div1 = div2
+#         div2 = temp
+#     return div1
 
-def NOD(div1, div2):
-    if(div1 < div2):
-        temp = div1
-        div1 = div2
-        div2 = temp
-    while(div2 != 0):
-        temp = div1 % div2
-        div1 = div2
-        div2 = temp
-    return div1
+# def NOK_from_NOD(div1, div2):
+#     valNOD = NOD(div1, div2)
+#     return (div1*div2) // valNOD
 
-def NOK_from_NOD(div1, div2):
-    valNOD = NOD(div1, div2)
-    return (div1*div2) // valNOD
-
-print(NOK_from_NOD(val1, val2))
+# print(NOK_from_NOD(val1, val2))
 
 
 # 2. Вычислить число Пи c заданной точностью d. Пример: при d = 0.001,  c= 3.141.
 
 d = int(input('Введите число знаков после запятой для числа Пи:  '))
-math.pi
+
+def pi():
+    # Вычисление числа Pi с заданной точностью
+    # 3.141592653589793238462643383
+    # Ряд Тейлора для числа пи arcsin(x) at x=1/2. Алгоритм из документации Python по модулю Decimal 
+
+    decimal.getcontext().prec += 2  # Дополнительные разряды для промежуточных этапов вычисления
+    three = decimal.Decimal(3)      # substitute "three=3.0" for regular floats
+    lasts, t, s, n, na, d, da = 0, three, 3, 1, 0, 0, 24
+    while s != lasts:
+        lasts = s
+        n, na = n + na, na + 8
+        d, da = d + da, da + 32
+        t = (t * n) / d
+        s += t
+    decimal.getcontext().prec -= 2
+    return +s               # Унарный плюс применяет новую точность, указанную строкой выше
+
+decimal.getcontext().prec = d+1 # Задаём точность вычислений
+print(pi())
+
