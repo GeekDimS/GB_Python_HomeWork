@@ -112,3 +112,29 @@ def pi():
 decimal.getcontext().prec = d+1 # Задаём точность вычислений
 print(pi())
 
+
+# 3. Составить список простых множителей натурального числа N
+
+N = int(input('Введите целое натуральное число:  '))
+
+listPrimeNumber = [2]
+listTargetPrimeNumber = []
+number = N
+optNumber = int(number // 2)
+for i in range(3, optNumber, 2):
+    primeNumber = 1
+    for j in listPrimeNumber:
+        if i % j == 0:
+            primeNumber = 0
+            break
+    if primeNumber:
+        listPrimeNumber.append(i)
+        # print(f'Простое число {i}')
+for i in listPrimeNumber:
+    if number % i == 0:
+        listTargetPrimeNumber.append(i)
+        # print(f'Делитель {i}')
+print(f'Простые множители числа: {listTargetPrimeNumber}')
+
+
+
