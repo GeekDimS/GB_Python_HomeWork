@@ -1,6 +1,5 @@
 # 1.	Найти сумму чисел списка стоящих на нечетной позиции
 
-from audioop import reverse
 from random import randint
 
 
@@ -122,6 +121,7 @@ print(
 
 # 4. Простые делители числа 13195 - это 5, 7, 13 и 29.
 # Каков самый большой делитель числа 600851475143, являющийся простым числом?
+# Вар.1
 
 listPrimeNumber = [2]
 listTargetPrimeNumber = []
@@ -141,3 +141,35 @@ for i in listPrimeNumber:
         listTargetPrimeNumber.append(i)
         print(f'Делитель {i}')
 print(listTargetPrimeNumber)
+
+# # Вар.2 Решето Эратосфена
+
+# def primes_sieve(limit):
+#     a = [True]*limit
+#     a[0] = a[1] = False
+
+#     for(i, isprime) in enumerate(a):
+#         if isprime:
+#             yield i
+#             for n in xrange(i*i, limit, i):
+#                 a[n] = False
+
+# def primes(n, verbose=0): 
+#     """ Returns a list of primes < n """
+#     def pr(*args):
+#         if verbose > 0:
+#             print(*args)
+#     sieve = [True] * n
+#     pr("все чётные числа игнорируются и будут пропущены при возврате...\n") 
+#     for i in range(3,int(n**0.5)+1,2):
+#         if sieve[i]:
+#             pr('содержимое решета:\t{}'.format([x for x in range(3,n,2) if sieve[x]]))
+#             pr(f'i:{i} вычёркиваем все числа кратные "{i}", начиная с "{i}^2": {list(range(i*i, n, 2*i))}')
+#             sieve[i*i::2*i]=[False]*((n-i*i-1)//(2*i)+1)
+#             pr(f'sieve[{i}*{i}::2*{i}]=[False]*(({n-i}*{i-1})//(2*{i})+1)')
+#             pr('содержимое решета:\t{}'.format([x for x in range(3,n,2) if sieve[x]]))
+#             pr('*' * 60)
+#     return [2] + [i for i in range(3,n,2) if sieve[i]]
+
+# primes(50, verbose=1)
+
