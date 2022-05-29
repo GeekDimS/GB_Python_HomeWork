@@ -64,29 +64,28 @@
 # 1.	Найти НОК двух чисел
 
 import decimal
-import math
 from random import randint, random
 
 
-# val1 = int(input('Введите первое целое число:  '))
-# val2 = int(input('Введите второе целое число:  '))
+val1 = int(input('Введите первое целое число:  '))
+val2 = int(input('Введите второе целое число:  '))
 
-# def NOD(div1, div2):
-#     if(div1 < div2):
-#         temp = div1
-#         div1 = div2
-#         div2 = temp
-#     while(div2 != 0):
-#         temp = div1 % div2
-#         div1 = div2
-#         div2 = temp
-#     return div1
+def NOD(div1, div2):
+    if(div1 < div2):
+        temp = div1
+        div1 = div2
+        div2 = temp
+    while(div2 != 0):
+        temp = div1 % div2
+        div1 = div2
+        div2 = temp
+    return div1
 
-# def NOK_from_NOD(div1, div2):
-#     valNOD = NOD(div1, div2)
-#     return (div1*div2) // valNOD
+def NOK_from_NOD(div1, div2):
+    valNOD = NOD(div1, div2)
+    return (div1*div2) // valNOD
 
-# print(NOK_from_NOD(val1, val2))
+print(NOK_from_NOD(val1, val2))
 
 
 # 2. Вычислить число Пи c заданной точностью d. Пример: при d = 0.001,  c= 3.141.
@@ -161,5 +160,6 @@ with open('file.txt', 'r') as data:
     for i in data:
         if(int(i) % 2 != 0):
             readList.append(int(i))
+print('Список без чётных чисел')
 print(readList)
 
