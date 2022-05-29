@@ -65,6 +65,7 @@
 
 import decimal
 import math
+from random import randint, random
 
 
 # val1 = int(input('Введите первое целое число:  '))
@@ -143,4 +144,22 @@ print(f'Простые множители числа: {listTargetPrimeNumber}')
 origSeq = [1, 2, 3, 5, 1, 5, 3, 10]
 targetSeq = set(origSeq)
 print(f'Список неповторяющихся элементов: {targetSeq}')
+
+
+# 5.  Дан текстовый файл, содержащий целые числа. Удалить из него все четные числа.
+
+quantity, maxVal = 10, 50 # Количество чисел, максимальное значение чисел
+path = 'file.txt' #"GB_Python_HomeWork\\NW3\\file.txt"
+
+data = open(path, 'w')
+for i in range(quantity):
+    data.write(f'{str(randint(0, maxVal))}\n')
+data.close()
+
+readList = []
+with open('file.txt', 'r') as data:
+    for i in data:
+        if(int(i) % 2 != 0):
+            readList.append(int(i))
+print(readList)
 
