@@ -32,8 +32,8 @@
 # последовательность. Пример: [1, 5, 2, 3, 4, 6, 1, 7] => [1, 2, 3] или [1, 7] или [1, 6, 7] и т.д.
 # Порядок элементов менять нельзя
 
-# from random import randint
-
+from random import randint
+from cmath import sqrt
 
 # list_in = [1, 5, 2, 3, 4, 6, 1, 7]
 # list_out = []
@@ -70,18 +70,48 @@
 # которые в сумме дают 0. (решение будет долгим, ибо является демонстрационным при теме
 # многопоточного программирования).
 
-path = '1Kints.txt'
 
-with open(path, 'r') as fr:
-    inp_list = fr.readlines()
-    inp_list.pop()
-    list_val = list(map(int, inp_list))
-count = 0
-for vali in list_val:
-    for valj in list_val:
-        for valk in list_val:
-            if(vali + valj + valk == 0):
-                print(f'{vali} + {valj} + {valk} = 0')
-                count += 1
-print(f'Количество триплетов равно {count}') # Количество триплетов равно 420
-# print(list_val)
+# path = '1Kints.txt'
+
+# with open(path, 'r') as fr:
+#     inp_list = fr.readlines()
+#     inp_list.pop()
+#     list_val = list(map(int, inp_list))
+# count = 0
+# for vali in list_val:
+#     for valj in list_val:
+#         for valk in list_val:
+#             if(vali + valj + valk == 0):
+#                 print(f'{vali} + {valj} + {valk} = 0')
+#                 count += 1
+# print(f'Количество триплетов равно {count}') # Количество триплетов равно 420
+
+
+# Экстра-задачи:
+
+# 1.	Давайте представим, что ваша компания только что наняла вашего друга из колледжа и заплатила
+#  вам реферальный бонус. Потрясающе! Чтобы отпраздновать, вы берете свою команду в очень странный бар
+#  по соседству и используете реферальный бонус, чтобы купить и построить самую большую трехмерную
+#  пирамиду из пивных банок, которую вы можете.
+# Пирамида пивных банок будет квадратировать количество банок на каждом уровне - 1 банка на верхнем
+#  уровне, 4 на втором, 9 на следующем, 16, 25...
+# Определите функцию beeramid, чтобы вернуть количество полных уровней пирамиды пивных банок,
+# которую вы можете сделать, учитывая параметры: реферальный бонус и цена пивной банки.
+# Например:
+# beeramid(1500, 2)# 12
+# beeramid(5000, 3)# 16
+
+refbonus = 1500
+costbeer = 2
+
+
+def beeramid(refbonus, costbeer):
+    maxbeer = refbonus // costbeer
+    step = 0
+    while(maxbeer >= 0):
+        step += 1
+        maxbeer -= step**2
+    return step - 1
+
+
+print(beeramid(refbonus, costbeer))
