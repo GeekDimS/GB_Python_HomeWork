@@ -77,96 +77,151 @@ from re import X
 input_text = 'абвгдеж рабав копыто фабв Абкн абрыволк аБволк'
 slice_string = 'абв'
 
-output_text = ''
-start = 0
-end = input_text.casefold().find('абв')
-while end != -1:
-    output_text += input_text[start:end]
-    start = end + len(slice_string)
-    end = input_text.casefold().find('абв', start)
-print(output_text)
+def reduce_substring(inp_str, sub_str):
+    """
+    Функция удаления из строки указанной подстроки без учёта регистра
+    """
+    output_text = ''
+    start = 0
+    end = inp_str.casefold().find(sub_str)
+    while end != -1:
+        output_text += inp_str[start:end]
+        start = end + len(sub_str)
+        end = inp_str.casefold().find(sub_str, start)
+    if end == -1:
+        output_text += inp_str[start:]
+    return output_text
+
+print(reduce_substring(input_text, slice_string))
 
 
 # 2. Вы когда-нибудь играли в игру "Крестики-нолики"? Попробуйте создать её,
 # причем чтобы сыграть в нее можно было в одиночку.
 
-game = [['*', '*', '*'], ['*', '*', '*'], ['*', '*', '*']]
+# game = [['*', '*', '*'], ['*', '*', '*'], ['*', '*', '*']]
 
 
-def print_data(data):
-    print(data[0])
-    print(data[1])
-    print(data[2])
+# def print_data(data):
+#     print(data[0])
+#     print(data[1])
+#     print(data[2])
 
 
-def counting_win(list_lists, lit):
-    # if game[0] == ['X', 'X', 'X'] or game[1] == ['X', 'X', 'X'] or game[2] == ['X', 'X', 'X'] or (game[0][0] == 'X' and game[1][0] == 'X' and game[2][0] == 'X') or (game[0][1] == 'X' and game[1][1] == 'X' and game[1][2] == 'X') or (game[0][2] == 'X' and game[1][2] == 'X' and game[2][2] == 'X') or (game[0][0] == 'X' and game[1][1] == 'X' and game[2][2] == 'X') or (game[0][2] == 'X' and game[1][1] == 'X' or game[2][0] == 'X'):
-    #     return 1    
+# def counting_win(list_lists, lit):
+#     # if game[0] == ['X', 'X', 'X'] or game[1] == ['X', 'X', 'X'] or game[2] == ['X', 'X', 'X'] or (game[0][0] == 'X' and game[1][0] == 'X' and game[2][0] == 'X') or (game[0][1] == 'X' and game[1][1] == 'X' and game[1][2] == 'X') or (game[0][2] == 'X' and game[1][2] == 'X' and game[2][2] == 'X') or (game[0][0] == 'X' and game[1][1] == 'X' and game[2][2] == 'X') or (game[0][2] == 'X' and game[1][1] == 'X' or game[2][0] == 'X'):
+#     #     return 1    
 
-    for c in range(0, 3):
-        win = True
-        for r in range(0,3):
-            win &= game[c][r] == lit
-        if win:
-            return True
-    for r in range(0, 3):
-        win = True
-        for c in range(0,3):
-            win &= game[c][r] == lit
-        if win:
-            return True
-    win = True
-    for rc in range(0, 3):        
-        win &= game[rc][rc] == lit            
-    if win:
-        return True
-    win = True
-    for rc in range(0, 3):        
-        win &= game[rc][2-rc] == lit            
-    if win:
-        return True
-    return False     
+#     for c in range(0, 3):
+#         win = True
+#         for r in range(0,3):
+#             win &= game[c][r] == lit
+#         if win:
+#             return True
+#     for r in range(0, 3):
+#         win = True
+#         for c in range(0,3):
+#             win &= game[c][r] == lit
+#         if win:
+#             return True
+#     win = True
+#     for rc in range(0, 3):        
+#         win &= game[rc][rc] == lit            
+#     if win:
+#         return True
+#     win = True
+#     for rc in range(0, 3):        
+#         win &= game[rc][2-rc] == lit            
+#     if win:
+#         return True
+#     return False     
 
 
 
-print_data(game)
-set_game = {'11', '12', '13', '21', '22', '23', '31', '32', '33'}
-set_use_cell = set()
-set_key = {'1', '2', '3'}
-end = True
-while end:
-    not_ok = True
-    while not_ok:
-        row = input('Введите номер строки: ')
-        if not row in set_key:
-            print('Неправильно введён номер строки.')
-            break
-        column = input('Введите номер столбца: ')
-        if not column in set_key:
-            print('Неправильно введён номер столбца.')
-            break
-        use_cell = str(row) + str(column)
-        if use_cell in set_use_cell:
-            print('Эта клетка уже занята')
-            break
-        not_ok = False
+# print_data(game)
+# set_game = {'11', '12', '13', '21', '22', '23', '31', '32', '33'}
+# set_use_cell = set()
+# set_key = {'1', '2', '3'}
+# end = True
+# while end:
+#     not_ok = True
+#     while not_ok:
+#         row = input('Введите номер строки: ')
+#         if not row in set_key:
+#             print('Неправильно введён номер строки.')
+#             break
+#         column = input('Введите номер столбца: ')
+#         if not column in set_key:
+#             print('Неправильно введён номер столбца.')
+#             break
+#         use_cell = str(row) + str(column)
+#         if use_cell in set_use_cell:
+#             print('Эта клетка уже занята')
+#             break
+#         not_ok = False
 
-    set_game.discard(use_cell)
-    set_use_cell.add(use_cell)
+#     set_game.discard(use_cell)
+#     set_use_cell.add(use_cell)
 
-    if set_game != set():        
-        ai = set_game.pop()
-        set_use_cell.add(ai)
+#     if set_game != set():        
+#         ai = set_game.pop()
+#         set_use_cell.add(ai)
 
-    game[int(row)-1][int(column)-1] = 'X'
-    game[int(ai[0])-1][int(ai[1])-1] = 'O'
-    print_data(game)
-    if counting_win(game, 'X'):
-        print('Поздравляю! Вы победили!')
-        end = False
-    if counting_win(game, 'O'):
-        print('Вы проиграли.')
-        end = False
-    if set_game == set():
-        print('Боевая ничья!')
-        end = False
+#     game[int(row)-1][int(column)-1] = 'X'
+#     game[int(ai[0])-1][int(ai[1])-1] = 'O'
+#     print_data(game)
+#     if counting_win(game, 'X'):
+#         print('Поздравляю! Вы победили!')
+#         end = False
+#     if counting_win(game, 'O'):
+#         print('Вы проиграли.')
+#         end = False
+#     if set_game == set():
+#         print('Боевая ничья!')
+#         end = False
+
+
+# 3. «Ну, вышел я, короче, из подъезда. В общем, короче говоря, шел я, кажется, в магазин. Ну,эээ,
+# в общем, было лето, кажется. Как бы тепло. Солнечно, короче. Иду я, иду, в общем, по улице,
+# а тут, короче, яма. Я, эээээ…. Упал в нее. И снова вышел, короче, из подъезда. Ясен пень, в
+# магазин. В общем, лето на дворе, жарко, солнечно, птицы, короче, летают. Кстати, иду я по улице,
+#  иду, а тут, короче, яма. Ну, я в нее упал, в общем. Вышел из подъезда, короче. Лето на дворе,
+# ясен пень. Птицы поют, короче, солнечно. В общем, в магазин мне надо. Что-то явно не так, короче.
+#  «Рекурсия», - подумал я. Ээээ...короче, в общем, пошел другой дорогой и не упал в эту… ээээ… яму.
+#  Хлеба купил».
+# Отфильтруйте его, чтобы этот текст можно было нормально прочесть. Предусмотрите вариант,
+#  что мусорные слова могли быть написаны без использования запятых
+
+def replace_substring(inp_str, old_sub, new_sub):
+    out_str = inp_str.replace(old_sub, new_sub)
+    return out_str
+
+trash_list = ['ну','короче','в общем','говоря','кажется','как бы','эээээ','ясен пень','кстати','ээээ','эээ','...','…',', ,',',   ,',',  ,',',,'] #,'','','','','','','']
+trash_dict = {'\n': ' ', ', .': '.','. ,': '.',',.': '.','.  ,':'.',', .':'.' }
+text = """Ну, вышел я, короче, из подъезда. В общем, короче говоря, шел я, кажется, в магазин. Ну,эээ,
+в общем, было лето, кажется. Как бы тепло. Солнечно, короче. Иду я, иду, в общем, по улице,
+а тут, короче, яма. Я, эээээ…. Упал в нее. И снова вышел, короче, из подъезда. Ясен пень, в
+магазин. В общем, лето на дворе, жарко, солнечно, птицы, короче, летают. Кстати, иду я по улице,
+ иду, а тут, короче, яма. Ну, я в нее упал, в общем. Вышел из подъезда, короче. Лето на дворе,
+ясен пень. Птицы поют, короче, солнечно. В общем, в магазин мне надо. Что-то явно не так, короче.
+ «Рекурсия», - подумал я. Ээээ...короче, в общем, пошел другой дорогой и не упал в эту… ээээ… яму.
+ Хлеба купил"""
+
+text_out = text
+for item in trash_list:
+    text_out = reduce_substring(text_out, item)
+for key, item in trash_dict.items():
+    text_out = replace_substring(text_out, key, item)
+
+text_punct = text_out.split('.')
+text_punct_out = ''
+for string in text_punct:
+    if not string.isalnum:
+        string = ''
+    string = string.strip(' ')
+    string = string.strip(',')
+    string = string.strip(' ')
+    if string.islower():
+        string = string.capitalize()
+    text_punct_out += string + '. '
+
+print(text_punct_out)
