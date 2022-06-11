@@ -66,7 +66,6 @@
 import decimal
 from random import randint, random
 
-
 val1 = int(input('Введите первое целое число:  '))
 val2 = int(input('Введите второе целое число:  '))
 
@@ -100,18 +99,42 @@ def pi():
     decimal.getcontext().prec += 2  # Дополнительные разряды для промежуточных этапов вычисления
     three = decimal.Decimal(3)      # substitute "three=3.0" for regular floats
     lasts, t, s, n, na, d, da = 0, three, 3, 1, 0, 0, 24
+    count = 0
     while s != lasts:
         lasts = s
         n, na = n + na, na + 8
         d, da = d + da, da + 32
         t = (t * n) / d
         s += t
+        count += 1
     decimal.getcontext().prec -= 2
+    print(count)
     return +s               # Унарный плюс применяет новую точность, указанную строкой выше
+
 
 decimal.getcontext().prec = d+1 # Задаём точность вычислений
 print(pi())
 
+
+
+# 2.1
+# from decimal import Decimal
+
+
+# def chudnovskii_series(n) -> Decimal:
+#     pi = Decimal(0)
+#     delta = Decimal(10005).sqrt() / Decimal(4270934400)
+#     for i in range(0, n + 1):
+#         multiplier = (13591409 + 545140134 * i)
+#         if i != 0:
+#             delta *= -Decimal((6 * i - 5) * (2* i - 1) * (6 * i - 1) / Decimal(26680 * 640320 * 640320 * i * i * i))
+#         multiplier *= delta
+#         pi += multiplier
+#         print(f'iteration: {i}, pi = {(pi ** -1)}, current delta = {delta}')
+#     return pi ** -1
+
+
+# print(chudnovskii_series(706)) 
 
 # 3. Составить список простых множителей натурального числа N
 
